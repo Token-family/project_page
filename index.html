@@ -3,13 +3,13 @@
 <html lang="en">
 
 <head>
-  <meta content="MatchAnything" name="title" />
+  <meta content="TokenOCR" name="title" />
   <meta content="This paper proposes method to match image pairs from various modalities."
     name="description" />
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
   <meta content="English" name="language" />
   <meta content="Xingyi He" name="author" />
-  <title>MatchAnything</title>
+  <title>TokenOCR</title>
   <!-- Bootstrap -->
   <!-- <script src="js/video_comparison.js"></script> -->
   <script src="js/jquery-3.4.1.min.js"></script>
@@ -31,7 +31,7 @@
     }
 
     body {
-      font-family: 'Jost';
+      font-family: 'Comic Sans MS'; 
     }
 
     b {
@@ -255,42 +255,67 @@
           <div class="col-12">
             <h1 style="font-weight: bold">
               <b>
-                <span style="color: #78aa58">MatchAnything</span>: Universal <span style="color: #6589bf">Cross-Modality</span> Image Matching with <span style="color: #c68b5b">Large-Scale Pre-Training</span><br>
+               A <span style="color: #78aa58">Token-level</span> Universal Text Image Foundation Model for <span style="color: #c68b5b">Document Understanding</span> <br>
+                
               </b>
             </h1>
             <h4 style="color:#5a6268;">Arxiv 2025</h4>
             <hr>
-            <a href="https://hxy-123.github.io/" target="_blank">Xingyi He<sup>1</sup> </a> 
-            <a href="https://ritianyu.github.io/" target="_blank">Hao Yu<sup>1,2</sup> </a> 
-            <a href="https://pengsida.net" target="_blank">Sida Peng<sup>1</sup> </a> 
-            <a href="https://github.com/Cuistiano" target="_blank">Dongli Tan<sup>1</sup> </a> 
-            <a href="https://zehongs.github.io" target="_blank">Zehong Shen<sup>1</sup> </a> 
-            <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao<sup>1&dagger;</sup> </a> 
-            <a href="https://xzhou.me" target="_blank">Xiaowei Zhou<sup>1&dagger;</sup>
-            </a>
+            <a href="https://github.com/TongkunGuan/" target="_blank">Tongkun Guan<sup>1,2</sup> </a> 
+            <a href=" " target="_blank">Zining Wang<sup>2</sup> </a> 
+            <a href=" " target="_blank">Pei Fu<sup>2</sup> </a> 
+            <a href="https://github.com/857faker" target="_blank">Zhentao Guo<sup>2</sup> </a> 
+            <a href=" " target="_blank">Wei Shen<sup>1&dagger;</sup> </a> 
+            <a href=" " target="_blank">Kai zhou<sup>2</sup> </a> 
+            <a href=" " target="_blank">Tiezhu Yue<sup>2</sup></a>
+            <a href=" " target="_blank">Chen Duan<sup>2</sup> </a> 
+            <a href=" " target="_blank">Hao Sun<sup>2</sup> </a> 
+            <a href=" " target="_blank">Qianyi Jiang<sup>2</sup> </a> 
+            <a href=" " target="_blank">Junfeng Luo<sup>2</sup> </a> 
+            <a href=" " target="_blank">Xiaokang Yang<sup>1</sup> </a> 
             <p>
-              <sup>1</sup>State Key Lab of CAD&CG, Zhejiang University   <sup>2</sup>Shandong University
+              <sup>1</sup>Artificial intelligence Research Institute, Shanghai Jiao Tong University   <sup>2</sup>Meituan
             </p>
+
             <div class="row justify-content-center">
-              <div class="column">
+              <div class="column me-5">
                 <p class="mb-5">
-                  <a class="btn btn-large btn-light" href="https://arxiv.org/abs/2501.07556" role="button"
-                    target="_blank">
-                    <i class="ai ai-arxiv"></i>
-                    <b>Paper</b>
+                  <a class="btn btn-large btn-light" href="https://www.overleaf.com/project/676f73a7417ac0090cf43ec3" role="button" target="_blank">
+                    <i class="ai ai-overleaf"></i>
+                    <b>Overleaf</b>
                   </a>
                 </p>
               </div>
-              <div class="column">
+            
+              <div class="column me-5">
                 <p class="mb-5">
-                  <a class="btn btn-large btn-light" href="https://github.com/zju3dv/MatchAnything" role="button"
-                    target="_blank">
+                  <a class="btn btn-large btn-light" href="https://www.overleaf.com/project/676f73a7417ac0090cf43ec3" role="button" target="_blank">
+                    <i class="ai ai-arxiv"></i>
+                    <b>Arxiv</b>
+                  </a>
+                </p>
+              </div>
+            
+              <div class="column me-5">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="https://github.com/zju3dv/MatchAnything" role="button" target="_blank">
                     <i class="fa fa-github"></i>
-                    <!-- <b>Code (TBD)</b> -->
                     <b>Code</b>
                   </a>
                 </p>
               </div>
+            
+              <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="https://github.com/zju3dv/MatchAnything" role="button" target="_blank">
+                    <img src="newimg/huggingface.png" style="width: 18px; height: 18px;">
+                    <b>Demo</b>
+                  </a>
+                </p>
+              </div>
+            </div>
+            
+
             </div>
           </div>
         </div>
@@ -298,22 +323,52 @@
     </div>
   </section>
 
+
+
   <section>
     <div class="container">
       <div class="row">
         <div class="col-12">
+          
+                  <!-- 插入视频 -->
+                  <video width="100%" autoplay loop muted playsinline>
+                    <source src="newimg/video1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                  
+                  <video width="100%" autoplay loop muted playsinline>
+                    <source src="newimg/video2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                  
+                  <style>
+                    video::-webkit-media-controls {
+                      display: none !important;
+                    }
+                    video::-webkit-media-controls-enclosure {
+                      display: none !important;
+                    }
+                    video::-webkit-media-controls-panel {
+                      display: none !important;
+                    }
+                  </style>
+                  
+
           <h3>TL;DR</h3>
           <hr style="margin-top: 0px" />
           <p class="text-left">
-            (1) The paper focuses on finding pixel correspondences for image pairs from different imaging principles.<br>
-            (2) We propose a large-scale pre-training framework that utilizes <span style="color: #6589bf"><strong>cross-modal</strong> </span> training signals, incorporating diverse data from <span style="color: #c68b5b"><strong>various sources</strong></span>, to train models to recognize and match fundamental structures across images. This capability is transferable to real-world, unseen cross-modality image matching tasks. <br>
-            (3) The pre-trained models achieve significant boost on various unseen cross-modality image registration tasks, demonstrating strong generalizabilities. 
+            (1) The first token-level image text dataset (<span style="color: #c68b5b"><strong>TokenIT</strong> </span>) is proposed, which consists of <span style="color: #c20e0e"><strong>20 million</strong> </span> images and <span style="color: #c20e0e"><strong>1.8 billion</strong> </span> high-quality token-mask pairs.<br>
+            (2) The first token-level text image foundation model, <span style="color: #78aa58"><strong>TokenOCR</strong> </span> , is proposed to support downstream tasks. <br>
+            (3) The image-as-text semantic capability inspires us to develop <span style="color: #6589bf"><strong>TokenVL</strong></span>, a VQA-based MLLM tailored for document perception, understanding, and reasoning. <br>
+            (4) Extensive experiments demonstrate the effectiveness of our proposed <span style="color: #78aa58"><strong>TokenOCR</strong> </span>  and <span style="color: #6589bf"><strong>TokenVL</strong></span>. Specifically, <span style="color: #78aa58"><strong>TokenOCR</strong> </span>  shows exceptional "zero-shot" capabilities and flexibility compared to other VFMs, such as CLIP, SAM, and InternViT2.5. <span style="color: #6589bf"><strong>TokenVL</strong></span> with 8B parameters, incorporating <span style="color: #78aa58"><strong>TokenOCR</strong> </span>  as the VFM, achieves performance gains of <span style="color: #c20e0e"><strong>38</strong> </span> on OCRBench and an average of <span style="color: #c20e0e"><strong>8.8%</strong> </span> across ten VQA tasks. Similarly, <span style="color: #6589bf"><strong>TokenVL</strong></span> with 2B parameters results in performance gains of <span style="color: #c20e0e"><strong>17</strong> </span> on OCRBench and an average of <span style="color: #c20e0e"><strong>13.34%</strong> </span> on the ten VQA tasks. 
             <!-- <strong>All codes and weights are publicly available.</strong> -->
           </p>
         </div>
       </div>
     </div>
   </section>
+
+
 
   <section>
     <div class="container">
@@ -328,9 +383,10 @@
             <title>Image and Video Side by Side</title>
             <style>
                 .media-section {
-                    display: flex;
-                    align-items: center; /* 保证高度对齐 */
-                    transform: translateX(-6%);
+                  display: flex;
+                  justify-content: center; /* 水平居中 */
+                  align-items: center; /* 垂直居中 */
+                  transform: translateX(0%);
                 }
                 .media-section img,
                 .media-section video {
@@ -342,58 +398,72 @@
           <body>
               <div class="media-section">
                   <!-- 图片 -->
-                  <img src="img/teaser_video_train_part.png" alt="Example Image">
+                  <img src="newimg/VFM.png" alt="Example Image">
                   <!-- 视频 -->
-                  <video controls playsinline autoplay loop preload muted>
-                      <source src="img/teaser_v0.mov" type="video/mp4">
-                      Your browser does not support the video tag.
-                  </video>
+                  <img src="newimg/VFM0.png" alt="Example Image">
               </div>
           </body>
+          <!-- <br> -->
+          <p style="font-size: small; text-align: justify;">
+            <!-- <strong>Capabilities</strong>  -->
+            We develop a token-level foundation model, <span style="color: #78aa58"><strong>TokenOCR</strong> </span>, specifically tailored for text-image-related tasks (path 2), in contrast to previous general foundation models (path 1). TokenOCR is trained on a substantial self-built dataset, <span style="color: #c68b5b"><strong>TokenIT</strong> </span>, comprising <span style="color: #c20e0e"><strong>20 million</strong> </span> images and <span style="color: #c20e0e"><strong>1.8 billion</strong> </span> token-mask pairs. This well-learned model is capable of supplanting other VFMs in related downstream tasks.
+        </p>
           <br>
-
-          <!-- <div class="media-container" style="display: flex; justify-content: center; align-items: center;">
-            <video id="demo" width="90%" playsinline autoplay loop preload muted>
-              <source src="img/teaser_v0.mov" type="video/mp4">
-            </video>
-          </div> -->
-
-          <p style="font-size: small;">
-            <strong>Capabilities</strong> of the image matching model pre-trained by our framework. Green lines indicate the identified corresponding pixel localizations between images. Using the same network weight, our model exhibits impressive generalization abilities across extensive unseen real-world cross-modality matching tasks, benefiting diverse applications in
-            disciplines such as (a) medical image analysis, (b) histopathology, (c) remote sensing, autonomous systems including (d) UAV positioning,
-            (e) autonomous driving, and more.
-            </p>
+          <p style="text-align: justify;">
+            In recent years, general visual foundation models (VFMs) have witnessed increasing adoption, particularly as image encoders for popular multi-modal large language models (MLLMs). However, without semantically fine-grained supervision, these models still encounter fundamental prediction errors in the context of downstream text-image-related tasks, i.e., perception, understanding and reasoning with images containing small and dense texts. To bridge this gap, we develop <span style="color: #78aa58"><strong>TokenOCR</strong> </span>, the first token-level visual foundation model specifically tailored for text-image-related tasks, designed to support a variety of traditional downstream applications. To facilitate the pretraining of TokenOCR, we also devise a high-quality data production pipeline that constructs the first token-level image text dataset, <span style="color: #c68b5b"><strong>TokenIT</strong> </span>, comprising <span style="color: #c20e0e"><strong>20 million</strong> </span> images and <span style="color: #c20e0e"><strong>1.8 billion</strong> </span> token-mask pairs. Furthermore, leveraging this foundation with exceptional image-as-text capability, we seamlessly replace previous VFMs with TokenOCR to construct a document-level MLLM, <span style="color: #6589bf"><strong>TokenVL</strong></span>, for VQA-based document understanding tasks.<br>
+          </p>
           <br>
-          <p class="text-left">
-              Image matching, which aims to identify corresponding pixel locations between images, is crucial in a wide range of scientific disciplines, aiding in image registration, fusion, and analysis. In recent years, deep learning-based image matching algorithms have dramatically outperformed humans in rapidly and accurately finding large amounts of correspondences. However, when dealing with images captured under different imaging modalities that result in significant appearance changes, the performance of these algorithms often deteriorates due to the scarcity of annotated cross-modal training data. This limitation hinders applications in various fields that rely on multiple image modalities to obtain complementary information. 
-              <!-- <br> -->
-              To address this challenge, we propose a large-scale pre-training framework that utilizes synthetic cross-modal training signals, incorporating diverse data from various sources, to train models to recognize and match fundamental structures across images. This capability is transferable to real-world, unseen cross-modality image matching tasks. Our key finding is that the matching model trained with our framework achieves remarkable generalizability across more than eight unseen cross-modality registration tasks using the same network weight, substantially outperforming existing methods, whether designed for generalization or tailored for specific tasks.
-              This advancement significantly enhances the applicability of image matching technologies across various scientific disciplines and paves the way for new applications in multi-modality human and artificial intelligence (AI) analysis and beyond. <br>
+          <p style="text-align: justify; color: grey;">
+            Note: The feature map shown on this page consists of token-level image features and token-level language features aligned within the same semantic space.
           </p>
         </div>
       </div>
     </div>
   </section>
 
+
   <section>
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h3>Method</h3>
+          <h3>TokenIT Dataset</h3>
           <hr style="margin-top: 0px" />
           <div style="display: flex; justify-content: center;">
-            <img src="img/proj_page_a.png" width="95%" />
+            <img src="newimg/dataset.png" width="100%" />
           </div>
-          <br>
-          <p>
-            <strong>Preliminary</strong>:
-            We first introduce two types of transformer-based detector-free matching architectures, including dense and semi-dense, serving as base models for our pre-training framework.
+          <!-- <br> -->
+          <p style="font-size: small; text-align: justify;">
+            <!-- <strong>Preliminary</strong>: -->
+            An overview of the self-constructed token-level <span style="color: #c68b5b"><strong>TokenIT</strong> </span> dataset,  comprising <span style="color: #c20e0e"><strong>20 million</strong> </span> images and <span style="color: #c20e0e"><strong>1.8 billion</strong> </span> text-mask pairs. (a) provides a detailed description of each sample, including the raw image, a mask, and a JSON file that records BPE token information. We also count (b) the data distribution, (c) the number of selected BPE tokens, and (d) a word cloud map highlighting the top 100 BPE tokens.
+          </p>
+        </div>
+        <br>
+      </div>
+    </div>
+  </section>
+
+<!-- 
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Methodology</h3>
+          <hr style="margin-top: 0px" />
+
+
+          <div style="display: flex; justify-content: center;">
+            <img src="newimg/arch.png" width="95%" />
+          </div>
+          <p style="font-size: small; text-align: justify;">
+            <strong>Pipeline</strong>.
+            An overview of the proposed <span style="color: #78aa58"><strong>TokenOCR</strong> </span>, where the token-level image features and token-level language features are aligned within the same semantic space. This “image-as-text” alignment seamlessly facilitates user-interactive applications, including text segmentation, retrieval, and visual question answering.
+
           </p>
         </div>
         <br>
         <div class="col-12">
           <div style="display: flex; justify-content: center;">
-            <img src="img/proj_page_b.png" width="95%" />
+            <img src="newimg/vqa2.png" width="95%" />
           </div>
           <br>
           <p>
@@ -405,7 +475,67 @@
         </div>
       </div>
     </div>
+  </section> -->
+
+
+
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Methodology</h3>
+          <hr style="margin-top: 0px" />
+
+          <div style="display: flex; justify-content: center;">
+            <img src="newimg/arch.png" width="100%" />
+          </div>
+          <p style="font-size: small; text-align: justify;">
+            <strong>Pipeline</strong>.
+            An overview of the proposed <span style="color: #78aa58"><strong>TokenOCR</strong> </span>, where the token-level image features and token-level language features are aligned within the same semantic space. This “image-as-text” alignment seamlessly facilitates user-interactive applications, including text segmentation, retrieval, and visual question answering.
+
+          </p>
+
+
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Image and Video Side by Side</title>
+            <style>
+                .media-section {
+                  display: flex;
+                  justify-content: center; /* 水平居中 */
+                  align-items: center; /* 垂直居中 */
+                  transform: translateX(0%);
+                }
+                .media-section img,
+                .media-section img {
+                    height: 400px;
+                    width: auto; /* 保持宽高比 */
+                    margin: 0 20px; /* 增加左右边距 */
+                }
+            </style>
+          </head>
+          <body>
+              <div class="media-section">
+                  <!-- 图片 -->
+                  <img src="newimg/vqa2.png" alt="Example Image" style="height: 500px; width: auto; margin-right: 60px;">
+                  <!-- 视频 -->
+                  <img src="newimg/vqa3.png" alt="Example Image" style="height: 500px; width: auto; margin-right: 60px;">
+              </div>
+          </body>
+          <!-- <br> -->
+          <p style="font-size: small; text-align: justify;">
+            <!-- <strong>Capabilities</strong>  -->
+            The framework of LLM-guided Token Alignment Training. Existing MLLMs primarily enhance spatial-wise text perception capabilities by integrating localization prompts to predict coordinates. However, this implicit method makes it difficult for these models to have a precise understanding. In contrast, the proposed token alignment uses BPE token masks to directly and explicitly align text with corresponding pixels in the input image, enhancing the MLLM's localization awareness. 
+        </p>
+          <br>
+        </div>
+      </div>
+    </div>
   </section>
+
+
 
   <section>
     <div class="container">
@@ -413,10 +543,12 @@
         <div class="col-12">
           <h3>Training & Evaluation Metrics</h3>
           <hr style="margin-top: 0px" />
-          <p><strong>Training</strong>:
-              Our data engine comprises a mixture of datasets, including MegaDepth, ScanNet++, BlendedMVS, DL3DV, SA-1B, and Google Landmark, as well as synthetic cross-modality pairs, including visible-depth, visible-thermal, and day-night. Pre-training is performed on 16 NVIDIA A100-80G GPUs with a batch size of 64. Models are trained from scratch, with training taking approximately 4.3 days for ELoFTR and 6 days for ROMA. For all experiments in this paper, we use the same pre-trained weights for each method during evaluation.
+          <p><strong>Implementation Details</strong>.
+            To pre-train the <span style="color: #78aa58"><strong>TokenOCR</strong> </span> foundation model, we employ the AdamW optimizer alongside a cosine learning rate schedule, with a base learning rate set at 5e-4. The model undergoes pre-training for two epochs on the <span style="color: #c68b5b"><strong>TokenIT</strong> </span> dataset. For <span style="color: #6589bf"><strong>TokenVL</strong> </span>, we leverage the well-trained <span style="color: #78aa58"><strong>TokenOCR</strong> </span> as the visual foundation model and InternLM as the language model.
+            Specifically, during the LLM-guided token alignment stage, InternLM remains frozen while we train the <span style="color: #78aa58"><strong>TokenOCR</strong> </span> and newly introduced modality connector. This stage involves training for one epoch on the TokenIT dataset, utilizing a base learning rate of 2e-4. In the subsequent supervised instruction tuning stage, all parameters are fully trainable, with a base learning rate of 1e-5. These experiments are executed on 64 H800 GPUs. Additional implementation details about other downstream experiments are provided within each respective subtask and Supplementary Material.
           </p>
-          <p><strong>Quantative and Qualtative Comparisons</strong>
+
+          <!-- <p><strong>Quantative and Qualtative Comparisons</strong>
           <div style="display: flex; justify-content: center;">
             <img src="img/results_a.png" width="90%" />
           </div>
@@ -436,7 +568,10 @@
           <div style="display: flex; justify-content: center;">
             <img src="img/statistics.png" width="90%" />
           </div>
-          </p>
+          </p> -->
+
+
+
         </div>
       </div>
     </div>
@@ -451,9 +586,9 @@
         <h3>Citation</h3>
         <hr style="margin-top: 0px" />
         <pre style="background-color: #e9eeef; padding: 1.5em 1.5em; border-radius: 20px">
-<code>@inproceedings{he2025matchanything,
-  title={MatchAnything: Universal Cross-Modality Image Matching with Large-Scale Pre-Training},
-  author={He, Xingyi and Yu, Hao and Peng, Sida and Tan, Dongli and Shen, Zehong and Bao, Hujun and Zhou, Xiaowei},
+<code>@inproceedings{guan2025TokenOCR,
+  title={A Token-level Text Image Foundation Model for Document Understanding},
+  author={Tongkun Guan, Zining Wang, Pei Fu, Zhentao Guo, Wei Shen, Kai zhou, Tiezhu Yue, Chen Duan, Hao Sun, Qianyi Jiang, Junfeng Luo, Xiaokang Yang},
   booktitle={Arxiv},
   year={2025}
 }</code></pre>
