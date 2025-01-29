@@ -329,30 +329,48 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-          
-                  <!-- 插入视频 -->
-                  <video width="100%" autoplay loop muted playsinline>
-                    <source src="newimg/video1.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                  
-                  <video width="100%" autoplay loop muted playsinline>
-                    <source src="newimg/video2.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                  
-                  <style>
-                    video::-webkit-media-controls {
-                      display: none !important;
-                    }
-                    video::-webkit-media-controls-enclosure {
-                      display: none !important;
-                    }
-                    video::-webkit-media-controls-panel {
-                      display: none !important;
-                    }
-                  </style>
-                  
+<!-- 插入视频 -->
+<!-- <video width="100%" autoplay loop muted playsinline style="border: 5px solid #ccc; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+  <source src="newimg/video1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<video width="100%" autoplay loop muted playsinline style="border: 5px solid #ccc; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+  <source src="newimg/video2.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video> -->
+<hr style="margin-top: 0px" />
+<video width="100%" autoplay loop muted playsinline style="clip-path: inset(40px 0px 40px 0px); border: 5px solid #ccc; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+  <source src="newimg/video1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<video width="100%" autoplay loop muted playsinline style="clip-path: inset(40px 0px 40px 0px); border: 5px solid #ccc; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+  <source src="newimg/video2.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<hr style="margin-top: 0px" />
+<style>
+  video::-webkit-media-controls {
+    display: none !important;
+  }
+  video::-webkit-media-controls-enclosure {
+    display: none !important;
+  }
+  video::-webkit-media-controls-panel {
+    display: none !important;
+  }
+</style>
+</div>
+</div>
+</div>
+</section>
+
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
 
           <h3>TL;DR</h3>
           <hr style="margin-top: 0px" />
@@ -398,7 +416,7 @@
           <body>
               <div class="media-section">
                   <!-- 图片 -->
-                  <img src="newimg/VFM.png" alt="Example Image">
+                  <img src="newimg/radar.png" alt="Example Image">
                   <!-- 视频 -->
                   <img src="newimg/VFM0.png" alt="Example Image">
               </div>
@@ -519,7 +537,7 @@
           <body>
               <div class="media-section">
                   <!-- 图片 -->
-                  <img src="newimg/vqa2.png" alt="Example Image" style="height: 500px; width: auto; margin-right: 60px;">
+                  <img src="newimg/vqa4.png" alt="Example Image" style="height: 500px; width: auto; margin-right: 60px;">
                   <!-- 视频 -->
                   <img src="newimg/vqa3.png" alt="Example Image" style="height: 500px; width: auto; margin-right: 60px;">
               </div>
@@ -548,29 +566,65 @@
             Specifically, during the LLM-guided token alignment stage, InternLM remains frozen while we train the <span style="color: #78aa58"><strong>TokenOCR</strong> </span> and newly introduced modality connector. This stage involves training for one epoch on the TokenIT dataset, utilizing a base learning rate of 2e-4. In the subsequent supervised instruction tuning stage, all parameters are fully trainable, with a base learning rate of 1e-5. These experiments are executed on 64 H800 GPUs. Additional implementation details about other downstream experiments are provided within each respective subtask and Supplementary Material.
           </p>
 
-          <!-- <p><strong>Quantative and Qualtative Comparisons</strong>
+          <p><strong>Text segmentation tasks</strong>
           <div style="display: flex; justify-content: center;">
-            <img src="img/results_a.png" width="90%" />
+            <img src="newimg/1.png" width="90%" />
           </div>
           </p>
-          <p>
+          <p style="font-size: small; text-align: justify;">
+            <!-- <strong>Capabilities</strong>  -->
+            Text segmentation experiments of various visual foundation models. "ZS" refers to the zero-shot task. "LP" denotes the linear probe experiment.
+        </p>
+
+
+
+
+          <p><strong>VQA tasks</strong>
           <div style="display: flex; justify-content: center;">
-            <img src="img/results_b.png" width="90%" />
+            <img src="newimg/2.png" width="90%" />
           </div>
           </p>
-          <p>
+          <p style="font-size: small; text-align: justify;">
+            <!-- <strong>Capabilities</strong>  -->
+            The ANLS results of various visual foundation models on VQA tasks.        
+          </p>
+
+
+          <p><strong>Linear probe tasks</strong>
           <div style="display: flex; justify-content: center;">
-            <img src="img/results_c.png" width="90%" />
+            <img src="newimg/3.png" width="90%" />
           </div>
           </p>
 
-          <p><strong>More Statistics Comparisons</strong>
+          <p style="font-size: small; text-align: justify;">
+            <!-- <strong>Capabilities</strong>  -->
+            Linear probe experiments of various VFMs on text retrieval tasks. All VFMs are frozen.          </p>
+
+
+
+          <p><strong>OCRbench benchmark</strong>
           <div style="display: flex; justify-content: center;">
-            <img src="img/statistics.png" width="90%" />
+            <img src="newimg/4.png" width="90%" />
           </div>
-          </p> -->
+          </p>
+
+          <p style="font-size: small; text-align: justify;">
+            <!-- <strong>Capabilities</strong>  -->
+            Comparison results of our TokenVL with other MLLMs on the OCRbench benchmark.
+                    </p>
 
 
+
+          <p><strong>Text-rich image understanding task</strong>
+            <div style="display: flex; justify-content: center;">
+              <img src="newimg/5.png" width="90%" />
+            </div>
+            </p>
+
+            <p style="font-size: small; text-align: justify;">
+              <!-- <strong>Capabilities</strong>  -->
+              Comparisons on various types of text-rich image understanding tasks. All evaluation benchmarks use the officially designated metrics. “size” refers to the number of parameters in the model, and “Val” refers to the validation set.
+                        </p>
 
         </div>
       </div>
