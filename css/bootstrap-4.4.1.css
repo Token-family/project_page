@@ -10670,3 +10670,31 @@ a.text-dark:focus {
     }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+.video-container {
+    width: 300px;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.video-container:hover {
+    transform: scale(1.1);
+}
+
+.modal-header {
+    border-radius: 15px; /* 圆角半径 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+
+.modal-content {
+    border-radius: 15px; /* 设置圆角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 添加阴影 */
+    background: linear-gradient(135deg,#e6ebf0, #e6e1f0, #eee4e1); /* 45度渐变背景 */
+    color: white; /* 确保文字颜色与背景对比明显 */
+    overflow: hidden; /* 确保内部元素不会溢出圆角 */
+}
+
+/* 可选：为模态框背景添加过渡动画效果 */
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+}

@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta content="TokenOCR" name="title" />
+  <meta content="This paper proposes method to match image pairs from various modalities."
+    name="description" />
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <meta content="English" name="language" />
+  <meta content="Xingyi He" name="author" />
+  <title>TokenOCR</title>
+  <!-- Bootstrap -->
+  <!-- <script src="js/video_comparison.js"></script> -->
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap-4.4.1.js"></script>
+
+
+
+  <link href="css/bootstrap-4.4.1.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700;800;900&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css" rel="stylesheet" />
+
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"></script>
+
+  <style>
+    code {
+      white-space: pre-wrap;
+    }
+
+    body {
+      font-family: 'Comic Sans MS'; 
+    }
+
+    b {
+      font-weight: black;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+
+    section>h5 {
+      padding-bottom: 30px;
+    }
+
+    .col-12>h3 {
+      padding-top: 5px;
+    }
+
+    .results-section {
+      padding-bottom: 30px;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .carousel-control-prev {
+      left: 25px;
+    }
+
+    .carousel-control-next {
+      right: 25px;
+    }
+
+    .carousel-indicators {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      bottom: 0%;
+      left: 90%;
+
+      /* Adjust vertical position */
+      text-align: center;
+      /* Center the content horizontally */
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .carousel-indicators li {
+      background-color: transparent;
+      /* Hide the default Bootstrap indicators */
+      border: none;
+      /* Remove border */
+      margin: 0 25px;
+      display: inline-block;
+    }
+
+    .indicator-dot {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      text-indent: -999px;
+      border: none;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .row.sm-gutters {
+      margin-right: 5px;
+      margin-left: 5px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .row.sm-gutters>.col-md-4 {
+      padding-right: 5px;
+      padding-left: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    .row.sm-gutters>.col-md-6 {
+      padding-right: 5px;
+      padding-left: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    .row.sm-gutters>.col-md-12 {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+
+    .renbody-zoom-container {
+      width: 80%;
+      /* Or whatever size you want */
+      aspect-ratio: 0.75;
+      /* Or whatever size you want */
+      overflow: hidden;
+      /* Hide the parts of the video outside the container */
+      object-fit: cover;
+      /* Make sure the video covers the container without stretching */
+      object-position: center;
+      /* Center the video */
+      border-radius: 5px;
+    }
+
+    .mobile-zoom-container {
+      width: 100%;
+      /* Or whatever size you want */
+      aspect-ratio: 0.75;
+      /* Or whatever size you want */
+      overflow: hidden;
+      /* Hide the parts of the video outside the container */
+      object-fit: cover;
+      /* Make sure the video covers the container without stretching */
+      object-position: center;
+      /* Center the video */
+      border-radius: 5px;
+      margin: 5px
+    }
+
+    .video-zoom-container {
+      overflow: hidden;
+      /* Hide the parts of the video outside the container */
+      object-fit: cover;
+      /* Make sure the video covers the container without stretching */
+      object-position: center;
+      border-radius: 5px;
+      margin: 5px;
+    }
+
+    .zoom-element {
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .zoom-element:hover {
+      transform: scale(1.);
+    }
+
+    .nhr-zoom {
+      transform: scale(1.45);
+    }
+
+    .renbody-zoom {
+      transform: scale(1.65) translateY(2%);
+      border-radius: 5px;
+    }
+
+    .mobile-zoom {
+      transform: scale(1.65);
+      border-radius: 5px;
+    }
+
+    .zjumocap-zoom {
+      transform: scale(1.3);
+    }
+
+    video {
+      border-radius: 5px;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .comparison-canvas {
+      padding: 0px;
+      margin: 0px;
+      border-radius: 5px;
+    }
+
+    .a16x9 {
+      aspect-ratio: 16/9;
+    }
+
+    .a4x3 {
+      aspect-ratio: 1352/1014;
+    }
+
+    .a1x1 {
+      aspect-ratio: 1;
+    }
+
+    .a16x9demo {
+      aspect-ratio: 3.05;
+    }
+
+    .a4x3demo {
+      aspect-ratio: 2.0;
+    }
+
+    .a1x1demo {
+      aspect-ratio: 1600/1672;
+    }
+  </style>
+  <script>
+
+  </script>
+  </link>
+</head>
+
+<body>
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1 style="font-weight: bold">
+              <b>
+               <!-- A <span style="color: #78aa58">Token-level</span> Universal Text Image Foundation Model for <span style="color: #c68b5b">Document Understanding</span> <br> -->
+                
+               <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <style>
+                    .gradient-text {
+                        background: linear-gradient(45deg, #1A73D1, #8461C4, #E18766);
+                        -webkit-background-clip: text;
+                        background-clip: text; /* 标准属性 */
+                        color: transparent;
+                        font-weight: bold; /* 加粗文本 */
+                        line-height: 2.2; /* 调整行高 */
+                    }
+                </style>
+                <title>Gradient Text Example</title>
+            </head>
+            <body>
+                <h1 class="gradient-text">A Token-level Universal Text Image Foundation Model for Document Understanding</h1>
+            </body>
+
+
+
+              </b>
+            </h1>
+            <h4 style="color:#9f9f9f ;">Arxiv 2025</h4>
+            <hr>
+
+
+            <a href="https://github.com/TongkunGuan/" target="_blank">Tongkun Guan<sup>1,4</sup> </a> 
+            <a href=" " target="_blank">Zining Wang<sup>4</sup> </a> 
+            <a href=" " target="_blank">Pei Fu<sup>4</sup> </a> 
+            <a href="https://github.com/857faker" target="_blank">Zhentao Guo<sup>2,4</sup> </a> 
+            <a href=" " target="_blank">Wei Shen<sup>1&dagger;</sup> </a> 
+            <a href=" " target="_blank">Kai zhou<sup>4</sup> </a> 
+            <a href=" " target="_blank">Tiezhu Yue<sup>4</sup></a>
+            <a href=" " target="_blank">Chen Duan<sup>4</sup> </a> 
+            <a href=" " target="_blank">Hao Sun<sup>3,4</sup> </a> 
+            <a href=" " target="_blank">Qianyi Jiang<sup>4</sup> </a> 
+            <a href=" " target="_blank">Junfeng Luo<sup>4</sup> </a> 
+            <a href=" " target="_blank">Xiaokang Yang<sup>4</sup> </a> 
+            <p style="color:gray;">
+              <sup>1</sup>Artificial intelligence Research Institute, Shanghai Jiao Tong University   
+              <sup>2</sup>School of Automation, Beijing Institute of Technology   
+              <sup>3</sup>Institute of Automation, Chinese Academy of Sciences   
+              <sup>4</sup>Meituan
+            </p>
+            <div class="row justify-content-center">
+              <div class="column me-5">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="https://www.overleaf.com/project/676f73a7417ac0090cf43ec3" role="button" target="_blank">
+                    <i class="ai ai-overleaf"></i>
+                    <b>Overleaf</b>
+                  </a>
+                </p>
+              </div>
+            
+              <div class="column me-5">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="https://www.overleaf.com/project/676f73a7417ac0090cf43ec3" role="button" target="_blank">
+                    <i class="ai ai-arxiv"></i>
+                    <b>Arxiv</b>
+                  </a>
+                </p>
+              </div>
+            
+              <div class="column me-5">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="https://github.com/zju3dv/MatchAnything" role="button" target="_blank">
+                    <i class="fa fa-github"></i>
+                    <b>Code</b>
+                  </a>
+                </p>
+              </div>
+            
+              <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="https://github.com/zju3dv/MatchAnything" role="button" target="_blank">
+                    <img src="newimg/huggingface.png" style="width: 18px; height: 18px;">
+                    <b>Demo</b>
+                  </a>
+                </p>
+              </div>
+            </div>
+
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- 框 -->
+<section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+<hr style="margin-top: 0px" />
+<video width="100%" autoplay loop muted playsinline style="clip-path: inset(40px 0px 40px 0px); border: 5px solid #ccc; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+  <source src="newimg/video1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<hr style="margin-top: 0px" />
+<style>
+  video::-webkit-media-controls {
+    display: none !important;
+  }
+  video::-webkit-media-controls-enclosure {
+    display: none !important;
+  }
+  video::-webkit-media-controls-panel {
+    display: none !important;
+  }
+</style>
+</div>
+</div>
+</div>
+</section>
+
+
+
+
+
+<section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+            <!-- Video Box -->
+            <a href="#" data-toggle="modal" data-target="#videoModal">
+                <video 
+                    src="newimg/exp1.mp4" 
+                    style="
+                        width: 270px; 
+                        height: 387px; 
+                        border: 15px solid rgb(255, 255, 255); 
+                        cursor: pointer; 
+                        transition: transform 0.2s ease-in-out;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); border-radius: 15px; 
+                    " 
+                    onmouseover="this.style.transform='scale(1.1)';" 
+                    onmouseout="this.style.transform='scale(1)';" 
+                    muted 
+                    autoplay 
+                    loop
+                >
+                    Your browser does not support the video tag.
+                </video>
+            </a>
+        </div>
+        <!-- Modal -->
+<!-- 修改modal标签 -->
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog"
+     aria-labelledby="videoModalLabel" aria-hidden="true">
+
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="videoModalLabel" style="color: black;">Ability Display</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+  <div class="modal-body">
+    <div class="row">
+        <div class="col-md-6">
+            <video id="mainMedia" src="newimg/exp1.mp4" 
+                    style="
+                        width: 345px; 
+                        height: 495px; 
+                        border: 15px solid rgb(255, 255, 255);
+                        border-left-width: 34px;
+                        border-right-width: 34px; 
+                        cursor: pointer; 
+                        transition: transform 0.2s ease-in-out;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+                        border-radius: 15px;" 
+                    controls autoplay muted loop>
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Text and Buttons Section -->
+        <div class="col-md-6">
+            <h5 style="
+                margin-bottom: 10px; 
+                background: linear-gradient(45deg, #1A73D1, #8461C4, #E18766); 
+                -webkit-background-clip: text; 
+                -webkit-text-fill-color: transparent; 
+                display: inline-block; 
+                font-size: 24px; 
+                font-weight: bold;
+                line-height: 2em;">
+                Prompts
+            </h5>
+            <div style="margin-bottom: 40px;">
+                <textarea style="
+                    width: 100%; 
+                    height: 200px; 
+                    border-radius: 15px; 
+                    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); 
+                    padding: 10px; 
+                    border: 1px solid #ccc; 
+                    resize: none;" 
+                          readonly>“%”,   “.”,   “$”</textarea>
+            </div>
+
+            <h5 style="
+                margin-bottom: 10px; 
+                background: linear-gradient(45deg, #1A73D1, #8461C4, #E18766); 
+                -webkit-background-clip: text; 
+                -webkit-text-fill-color: transparent; 
+                display: inline-block; 
+                font-size: 24px; 
+                font-weight: bold;
+                line-height: 2em;">
+                Attentional diagram
+            </h5>
+
+            <div>
+                <button data-image="newimg/exp1_frame_at_2s.png" 
+                        style="
+                            width: 45%; 
+                            margin-right: 20px; 
+                            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                            border: none; 
+                            border-radius: 10px; 
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                            background-color: white; 
+                            color: black; 
+                            padding: 10px; 
+                            font-size: 16px;
+                            cursor: pointer;
+                            outline: none;"
+                        onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                        onclick="handleButtonClick(this)">
+                    Raw image
+                </button>
+                <button data-image="newimg/exp1_frame_at_6s.png" 
+                        style="
+                            width: 45%; 
+                            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                            border: none; 
+                            border-radius: 10px; 
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                            background-color: white; 
+                            color: black; 
+                            padding: 10px; 
+                            font-size: 16px;
+                            cursor: pointer;
+                            outline: none;"
+                        onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                        onclick="handleButtonClick(this)">
+                    “%”
+                </button>
+
+                <h1></h1>
+                <h1></h1>
+                <h1></h1>
+                <h1></h1>
+
+                <button data-image="newimg/exp1_frame_at_10s.png" 
+                        style="
+                            width: 45%; 
+                            margin-right: 20px; 
+                            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                            border: none; 
+                            border-radius: 10px; 
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                            background-color: white; 
+                            color: black; 
+                            padding: 10px; 
+                            font-size: 16px;
+                            cursor: pointer;
+                            outline: none;"
+                        onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                        onclick="handleButtonClick(this)">
+                    “.”
+                </button>
+                <button data-image="newimg/exp1_frame_at_14s.png" 
+                        style="
+                            width: 45%; 
+                            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                            border: none; 
+                            border-radius: 10px; 
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                            background-color: white; 
+                            color: black; 
+                            padding: 10px; 
+                            font-size: 16px;
+                            cursor: pointer;
+                            outline: none;"
+                        onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                        onclick="handleButtonClick(this)">
+                    “$”
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+            
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  <section>
+    <div class="container">
+      <div class="row">
+        <!-- 第一列 -->
+        <div class="col-md-3">
+          <a href="#" data-toggle="modal" data-target="#videoModal11">
+            <video 
+                src="newimg/exp1.mp4" 
+                style="
+                        width: 270px; 
+                        height: 387px; 
+                        border: 15px solid rgb(255, 255, 255); 
+                        cursor: pointer; 
+                        transition: transform 0.2s ease-in-out;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); border-radius: 15px; 
+                " 
+                onmouseover="this.style.transform='scale(1.1)';" 
+                onmouseout="this.style.transform='scale(1)';" 
+                muted 
+                autoplay 
+                loop
+            >
+                Your browser does not support the video tag.
+            </video>
+          </a>
+        </div>
+        <!-- 第二列 -->
+        <div class="col-md-3">
+          <a href="#" data-toggle="modal" data-target="#videoModal12">
+            <video 
+                src="newimg/exp1.mp4" 
+                style="
+                        width: 270px; 
+                        height: 387px; 
+                        border: 15px solid rgb(255, 255, 255); 
+                        cursor: pointer; 
+                        transition: transform 0.2s ease-in-out;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); border-radius: 15px; 
+                " 
+                onmouseover="this.style.transform='scale(1.1)';" 
+                onmouseout="this.style.transform='scale(1)';" 
+                muted 
+                autoplay 
+                loop
+            >
+                Your browser does not support the video tag.
+            </video>
+          </a>
+        </div>
+        <!-- 第三列 -->
+        <div class="col-md-3">
+          <a href="#" data-toggle="modal" data-target="#videoModal13">
+            <video 
+                src="newimg/exp1.mp4" 
+                style="
+                        width: 270px; 
+                        height: 387px; 
+                        border: 15px solid rgb(255, 255, 255); 
+                        cursor: pointer; 
+                        transition: transform 0.2s ease-in-out;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); border-radius: 15px; 
+                " 
+                onmouseover="this.style.transform='scale(1.1)';" 
+                onmouseout="this.style.transform='scale(1)';" 
+                muted 
+                autoplay 
+                loop
+            >
+                Your browser does not support the video tag.
+            </video>
+          </a>
+        </div>
+        <!-- 第四列 -->
+        <div class="col-md-3">
+          <a href="#" data-toggle="modal" data-target="#videoModal14">
+            <video 
+                src="newimg/exp1.mp4" 
+                style="
+                        width: 270px; 
+                        height: 387px; 
+                        border: 15px solid rgb(255, 255, 255); 
+                        cursor: pointer; 
+                        transition: transform 0.2s ease-in-out;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); border-radius: 15px; 
+                " 
+                onmouseover="this.style.transform='scale(1.1)';" 
+                onmouseout="this.style.transform='scale(1)';" 
+                muted 
+                autoplay 
+                loop
+            >
+                Your browser does not support the video tag.
+            </video>
+          </a>
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- 模态框1 -->
+<div class="modal fade" id="videoModal11" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel11" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="videoModalLabel11" style="color: black;">Ability Display</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <video id="mainMedia11" src="newimg/exp1.mp4" 
+                        style="
+                            width: 345px; 
+                            height: 495px; 
+                            border: 15px solid rgb(255, 255, 255);
+                            border-left-width: 34px;
+                            border-right-width: 34px; 
+                            cursor: pointer; 
+                            transition: transform 0.2s ease-in-out;
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+                            border-radius: 15px;" 
+                        controls autoplay muted loop>
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+    
+            <!-- Text and Buttons Section -->
+            <div class="col-md-6">
+                <h5 style="
+                    margin-bottom: 10px; 
+                    background: linear-gradient(45deg, #1A73D1, #8461C4, #E18766); 
+                    -webkit-background-clip: text; 
+                    -webkit-text-fill-color: transparent; 
+                    display: inline-block; 
+                    font-size: 24px; 
+                    font-weight: bold;
+                    line-height: 2em;">
+                    Prompts
+                </h5>
+                <div style="margin-bottom: 40px;">
+                    <textarea style="
+                        width: 100%; 
+                        height: 200px; 
+                        border-radius: 15px; 
+                        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); 
+                        padding: 10px; 
+                        border: 1px solid #ccc; 
+                        resize: none;" 
+                              readonly>“%”,   “.”,   “$”</textarea>
+                </div>
+    
+                <h5 style="
+                    margin-bottom: 10px; 
+                    background: linear-gradient(45deg, #1A73D1, #8461C4, #E18766); 
+                    -webkit-background-clip: text; 
+                    -webkit-text-fill-color: transparent; 
+                    display: inline-block; 
+                    font-size: 24px; 
+                    font-weight: bold;
+                    line-height: 2em;">
+                    Attentional diagram
+                </h5>
+    
+                <div>
+                    <button data-image="newimg/exp1_frame_at_2s.png" 
+                            style="
+                                width: 45%; 
+                                margin-right: 20px; 
+                                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                                border: none; 
+                                border-radius: 10px; 
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                                background-color: white; 
+                                color: black; 
+                                padding: 10px; 
+                                font-size: 16px;
+                                cursor: pointer;
+                                outline: none;"
+                            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                            onclick="handleButtonClick11(this)">
+                        Raw image
+                    </button>
+                    <button data-image="newimg/exp1_frame_at_6s.png" 
+                            style="
+                                width: 45%; 
+                                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                                border: none; 
+                                border-radius: 10px; 
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                                background-color: white; 
+                                color: black; 
+                                padding: 10px; 
+                                font-size: 16px;
+                                cursor: pointer;
+                                outline: none;"
+                            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                            onclick="handleButtonClick11(this)">
+                        “%”
+                    </button>
+    
+                    <h1></h1>
+                    <h1></h1>
+                    <h1></h1>
+                    <h1></h1>
+    
+                    <button data-image="newimg/exp1_frame_at_10s.png" 
+                            style="
+                                width: 45%; 
+                                margin-right: 20px; 
+                                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                                border: none; 
+                                border-radius: 10px; 
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                                background-color: white; 
+                                color: black; 
+                                padding: 10px; 
+                                font-size: 16px;
+                                cursor: pointer;
+                                outline: none;"
+                            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                            onclick="handleButtonClick11(this)">
+                        “.”
+                    </button>
+                    <button data-image="newimg/exp1_frame_at_14s.png" 
+                            style="
+                                width: 45%; 
+                                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                                border: none; 
+                                border-radius: 10px; 
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                                background-color: white; 
+                                color: black; 
+                                padding: 10px; 
+                                font-size: 16px;
+                                cursor: pointer;
+                                outline: none;"
+                            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                            onclick="handleButtonClick11(this)">
+                        “$”
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- 模态框2 -->
+<div class="modal fade" id="videoModal12" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel12" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="videoModalLabel12" style="color: black;">Ability Display</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <video id="mainMedia12" src="newimg/exp1.mp4" 
+                        style="
+                            width: 345px; 
+                            height: 495px; 
+                            border: 15px solid rgb(255, 255, 255);
+                            border-left-width: 34px;
+                            border-right-width: 34px; 
+                            cursor: pointer; 
+                            transition: transform 0.2s ease-in-out;
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+                            border-radius: 15px;" 
+                        controls autoplay muted loop>
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+    
+            <!-- Text and Buttons Section -->
+            <div class="col-md-6">
+                <h5 style="
+                    margin-bottom: 10px; 
+                    background: linear-gradient(45deg, #1A73D1, #8461C4, #E18766); 
+                    -webkit-background-clip: text; 
+                    -webkit-text-fill-color: transparent; 
+                    display: inline-block; 
+                    font-size: 24px; 
+                    font-weight: bold;
+                    line-height: 2em;">
+                    Prompts
+                </h5>
+                <div style="margin-bottom: 40px;">
+                    <textarea style="
+                        width: 100%; 
+                        height: 200px; 
+                        border-radius: 15px; 
+                        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); 
+                        padding: 10px; 
+                        border: 1px solid #ccc; 
+                        resize: none;" 
+                              readonly>“%”,   “.”,   “$”</textarea>
+                </div>
+    
+                <h5 style="
+                    margin-bottom: 10px; 
+                    background: linear-gradient(45deg, #1A73D1, #8461C4, #E18766); 
+                    -webkit-background-clip: text; 
+                    -webkit-text-fill-color: transparent; 
+                    display: inline-block; 
+                    font-size: 24px; 
+                    font-weight: bold;
+                    line-height: 2em;">
+                    Attentional diagram
+                </h5>
+    
+                <div>
+                    <button data-image="newimg/exp1_frame_at_2s.png" 
+                            style="
+                                width: 45%; 
+                                margin-right: 20px; 
+                                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                                border: none; 
+                                border-radius: 10px; 
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                                background-color: white; 
+                                color: black; 
+                                padding: 10px; 
+                                font-size: 16px;
+                                cursor: pointer;
+                                outline: none;"
+                            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                            onclick="handleButtonClick12(this)">
+                        Raw image
+                    </button>
+                    <button data-image="newimg/exp1_frame_at_6s.png" 
+                            style="
+                                width: 45%; 
+                                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                                border: none; 
+                                border-radius: 10px; 
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                                background-color: white; 
+                                color: black; 
+                                padding: 10px; 
+                                font-size: 16px;
+                                cursor: pointer;
+                                outline: none;"
+                            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                            onclick="handleButtonClick12(this)">
+                        “%”
+                    </button>
+    
+                    <h1></h1>
+                    <h1></h1>
+                    <h1></h1>
+                    <h1></h1>
+    
+                    <button data-image="newimg/exp1_frame_at_10s.png" 
+                            style="
+                                width: 45%; 
+                                margin-right: 20px; 
+                                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                                border: none; 
+                                border-radius: 10px; 
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                                background-color: white; 
+                                color: black; 
+                                padding: 10px; 
+                                font-size: 16px;
+                                cursor: pointer;
+                                outline: none;"
+                            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                            onclick="handleButtonClick12(this)">
+                        “.”
+                    </button>
+                    <button data-image="newimg/exp1_frame_at_14s.png" 
+                            style="
+                                width: 45%; 
+                                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                                border: none; 
+                                border-radius: 10px; 
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                                background-color: white; 
+                                color: black; 
+                                padding: 10px; 
+                                font-size: 16px;
+                                cursor: pointer;
+                                outline: none;"
+                            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                            onclick="handleButtonClick12(this)">
+                        “$”
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 模态框3 -->
+<div class="modal fade" id="videoModal13" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel13" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="videoModalLabel13" style="color: black;">Ability Display</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <video id="mainMedia13" src="newimg/exp1.mp4" 
+                        style="
+                            width: 345px; 
+                            height: 495px; 
+                            border: 15px solid rgb(255, 255, 255);
+                            border-left-width: 34px;
+                            border-right-width: 34px; 
+                            cursor: pointer; 
+                            transition: transform 0.2s ease-in-out;
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+                            border-radius: 15px;" 
+                        controls autoplay muted loop>
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+    
+            <!-- Text and Buttons Section -->
+            <div class="col-md-6">
+                <h5 style="
+                    margin-bottom: 10px; 
+                    background: linear-gradient(45deg, #1A73D1, #8461C4, #E18766); 
+                    -webkit-background-clip: text; 
+                    -webkit-text-fill-color: transparent; 
+                    display: inline-block; 
+                    font-size: 24px; 
+                    font-weight: bold;
+                    line-height: 2em;">
+                    Prompts
+                </h5>
+                <div style="margin-bottom: 40px;">
+                    <textarea style="
+                        width: 100%; 
+                        height: 200px; 
+                        border-radius: 15px; 
+                        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); 
+                        padding: 10px; 
+                        border: 1px solid #ccc; 
+                        resize: none;" 
+                              readonly>“%”,   “.”,   “$”</textarea>
+                </div>
+    
+                <h5 style="
+                    margin-bottom: 10px; 
+                    background: linear-gradient(45deg, #1A73D1, #8461C4, #E18766); 
+                    -webkit-background-clip: text; 
+                    -webkit-text-fill-color: transparent; 
+                    display: inline-block; 
+                    font-size: 24px; 
+                    font-weight: bold;
+                    line-height: 2em;">
+                    Attentional diagram
+                </h5>
+    
+                <div>
+                    <button data-image="newimg/exp1_frame_at_2s.png" 
+                            style="
+                                width: 45%; 
+                                margin-right: 20px; 
+                                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                                border: none; 
+                                border-radius: 10px; 
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                                background-color: white; 
+                                color: black; 
+                                padding: 10px; 
+                                font-size: 16px;
+                                cursor: pointer;
+                                outline: none;"
+                            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                            onclick="handleButtonClick13(this)">
+                        Raw image
+                    </button>
+                    <button data-image="newimg/exp1_frame_at_6s.png" 
+                            style="
+                                width: 45%; 
+                                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                                border: none; 
+                                border-radius: 10px; 
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                                background-color: white; 
+                                color: black; 
+                                padding: 10px; 
+                                font-size: 16px;
+                                cursor: pointer;
+                                outline: none;"
+                            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                            onclick="handleButtonClick13(this)">
+                        “%”
+                    </button>
+    
+                    <h1></h1>
+                    <h1></h1>
+                    <h1></h1>
+                    <h1></h1>
+    
+                    <button data-image="newimg/exp1_frame_at_10s.png" 
+                            style="
+                                width: 45%; 
+                                margin-right: 20px; 
+                                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                                border: none; 
+                                border-radius: 10px; 
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                                background-color: white; 
+                                color: black; 
+                                padding: 10px; 
+                                font-size: 16px;
+                                cursor: pointer;
+                                outline: none;"
+                            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                            onclick="handleButtonClick13(this)">
+                        “.”
+                    </button>
+                    <button data-image="newimg/exp1_frame_at_14s.png" 
+                            style="
+                                width: 45%; 
+                                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                                border: none; 
+                                border-radius: 10px; 
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                                background-color: white; 
+                                color: black; 
+                                padding: 10px; 
+                                font-size: 16px;
+                                cursor: pointer;
+                                outline: none;"
+                            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                            onclick="handleButtonClick13(this)">
+                        “$”
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+<!-- 模态框4 -->
+<div class="modal fade" id="videoModal14" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel14" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="videoModalLabel14" style="color: black;">Ability Display</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <video id="mainMedia14" src="newimg/exp1.mp4" 
+                        style="
+                            width: 345px; 
+                            height: 495px; 
+                            border: 15px solid rgb(255, 255, 255);
+                            border-left-width: 34px;
+                            border-right-width: 34px; 
+                            cursor: pointer; 
+                            transition: transform 0.2s ease-in-out;
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+                            border-radius: 15px;" 
+                        controls autoplay muted loop>
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+    
+            <!-- Text and Buttons Section -->
+            <div class="col-md-6">
+                <h5 style="
+                    margin-bottom: 10px; 
+                    background: linear-gradient(45deg, #1A73D1, #8461C4, #E18766); 
+                    -webkit-background-clip: text; 
+                    -webkit-text-fill-color: transparent; 
+                    display: inline-block; 
+                    font-size: 24px; 
+                    font-weight: bold;
+                    line-height: 2em;">
+                    Prompts
+                </h5>
+                <div style="margin-bottom: 40px;">
+                    <textarea style="
+                        width: 100%; 
+                        height: 200px; 
+                        border-radius: 15px; 
+                        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); 
+                        padding: 10px; 
+                        border: 1px solid #ccc; 
+                        resize: none;" 
+                              readonly>“%”,   “.”,   “$”</textarea>
+                </div>
+    
+                <h5 style="
+                    margin-bottom: 10px; 
+                    background: linear-gradient(45deg, #1A73D1, #8461C4, #E18766); 
+                    -webkit-background-clip: text; 
+                    -webkit-text-fill-color: transparent; 
+                    display: inline-block; 
+                    font-size: 24px; 
+                    font-weight: bold;
+                    line-height: 2em;">
+                    Attentional diagram
+                </h5>
+    
+                <div>
+                    <button data-image="newimg/exp1_frame_at_2s.png" 
+                            style="
+                                width: 45%; 
+                                margin-right: 20px; 
+                                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                                border: none; 
+                                border-radius: 10px; 
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                                background-color: white; 
+                                color: black; 
+                                padding: 10px; 
+                                font-size: 16px;
+                                cursor: pointer;
+                                outline: none;"
+                            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                            onclick="handleButtonClick14(this)">
+                        Raw image
+                    </button>
+                    <button data-image="newimg/exp1_frame_at_6s.png" 
+                            style="
+                                width: 45%; 
+                                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                                border: none; 
+                                border-radius: 10px; 
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                                background-color: white; 
+                                color: black; 
+                                padding: 10px; 
+                                font-size: 16px;
+                                cursor: pointer;
+                                outline: none;"
+                            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                            onclick="handleButtonClick14(this)">
+                        “%”
+                    </button>
+    
+                    <h1></h1>
+                    <h1></h1>
+                    <h1></h1>
+                    <h1></h1>
+    
+                    <button data-image="newimg/exp1_frame_at_10s.png" 
+                            style="
+                                width: 45%; 
+                                margin-right: 20px; 
+                                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                                border: none; 
+                                border-radius: 10px; 
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                                background-color: white; 
+                                color: black; 
+                                padding: 10px; 
+                                font-size: 16px;
+                                cursor: pointer;
+                                outline: none;"
+                            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                            onclick="handleButtonClick14(this)">
+                        “.”
+                    </button>
+                    <button data-image="newimg/exp1_frame_at_14s.png" 
+                            style="
+                                width: 45%; 
+                                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                                border: none; 
+                                border-radius: 10px; 
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                                background-color: white; 
+                                color: black; 
+                                padding: 10px; 
+                                font-size: 16px;
+                                cursor: pointer;
+                                outline: none;"
+                            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                            onclick="handleButtonClick14(this)">
+                        “$”
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+  
+
+
+</html>

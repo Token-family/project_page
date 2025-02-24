@@ -4519,3 +4519,337 @@
 
 })));
 //# sourceMappingURL=bootstrap.js.map
+
+
+// script.js
+document.addEventListener('DOMContentLoaded', function() {
+  var videoContainer = document.querySelector('.video-container');
+  var modal = document.getElementById('modal');
+  var span = document.getElementsByClassName('close')[0];
+
+  videoContainer.addEventListener('click', function() {
+      modal.style.display = 'block';
+  });
+
+  span.onclick = function() {
+      modal.style.display = 'none';
+  }
+
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = 'none';
+      }
+  }
+});
+
+
+$(document).ready(function() {
+  $('#videoModal').on('hidden.bs.modal', function (e) {
+    resetModal();
+  });
+});
+
+// 重置函数优化
+function resetModal() {
+  const mediaContainer = document.querySelector('.modal-body .col-md-6');
+  let currentMedia = document.getElementById('mainMedia');
+
+  // 强制替换为视频元素
+  if (!currentMedia || currentMedia.tagName !== 'VIDEO') {
+    const video = document.createElement('video');
+    video.id = 'mainMedia';
+    video.src = 'newimg/exp1.mp4';
+    video.controls = true;
+    video.autoplay = true;
+    video.muted = true;
+    video.loop = true;
+    video.setAttribute('style', currentMedia ? currentMedia.style.cssText : ''); 
+    
+    if(currentMedia) {
+      mediaContainer.replaceChild(video, currentMedia);
+    } else {
+      mediaContainer.appendChild(video);
+    }
+  }
+
+  // 强制重置所有按钮样式
+  document.querySelectorAll('.modal button').forEach(btn => {
+    btn.style.backgroundColor = 'white';
+    btn.style.color = 'black';
+  });
+}
+
+// 修改点击处理函数
+function handleButtonClick(button) {
+  document.querySelectorAll('.modal button').forEach(btn => {
+    btn.style.backgroundColor = 'white';
+    btn.style.color = 'black';
+  });
+  
+  button.style.backgroundColor = '#8461C4';
+  button.style.color = 'white';
+
+  // 更新媒体内容
+  const mediaElement = document.getElementById('mainMedia');
+  const newImageSrc = button.getAttribute('data-image');
+
+  if (mediaElement.tagName === 'VIDEO') {
+    const img = document.createElement('img');
+    img.id = 'mainMedia';
+    img.src = newImageSrc;
+    img.style.cssText = mediaElement.style.cssText;
+    mediaElement.parentNode.replaceChild(img, mediaElement);
+  } else {
+    mediaElement.src = newImageSrc;
+  }
+}
+
+
+
+
+
+// 新增jQuery事件监听（需要先引入jQuery）
+$(document).ready(function() {
+  // 将多个模态框的选择器用逗号分隔开
+  $('#videoModal11, #videoModal12, #videoModal13, #videoModal14').on('hidden.bs.modal', function (e) {
+    var modalId = $(this).attr('id'); // 获取当前隐藏模态框的ID
+    
+    switch(modalId) {
+      case 'videoModal11':
+        resetModal11();
+        break;
+      case 'videoModal12':
+        resetModal12();
+        break;
+      case 'videoModal13':
+        resetModal13();
+        break;
+      case 'videoModal14':
+        resetModal14();
+        break;
+      default:
+        console.log("Unknown modal ID");
+    }
+  });
+});
+
+
+// 重置函数优化
+function resetModal11() {
+  const mediaContainer = document.querySelector('.modal-body .col-md-6');
+  let currentMedia = document.getElementById('mainMedia11');
+
+  // 强制替换为视频元素
+  if (!currentMedia || currentMedia.tagName !== 'VIDEO') {
+    const video = document.createElement('video');
+    video.id = 'mainMedia11';
+    video.src = 'newimg/exp1.mp4';
+    video.controls = true;
+    video.autoplay = true;
+    video.muted = true;
+    video.loop = true;
+    video.setAttribute('style', currentMedia ? currentMedia.style.cssText : ''); 
+    
+    if(currentMedia) {
+      mediaContainer.replaceChild(video, currentMedia);
+    } else {
+      mediaContainer.appendChild(video);
+    }
+  }
+
+  // 强制重置所有按钮样式
+  document.querySelectorAll('.modal button').forEach(btn => {
+    btn.style.backgroundColor = 'white';
+    btn.style.color = 'black';
+  });
+}
+// 重置函数优化
+function resetModal12() {
+  const mediaContainer = document.querySelector('.modal-body .col-md-6');
+  let currentMedia = document.getElementById('mainMedia12');
+
+  // 强制替换为视频元素
+  if (!currentMedia || currentMedia.tagName !== 'VIDEO') {
+    const video = document.createElement('video');
+    video.id = 'mainMedia12';
+    video.src = 'newimg/exp1.mp4';
+    video.controls = true;
+    video.autoplay = true;
+    video.muted = true;
+    video.loop = true;
+    video.setAttribute('style', currentMedia ? currentMedia.style.cssText : ''); 
+    
+    if(currentMedia) {
+      mediaContainer.replaceChild(video, currentMedia);
+    } else {
+      mediaContainer.appendChild(video);
+    }
+  }
+
+  // 强制重置所有按钮样式
+  document.querySelectorAll('.modal button').forEach(btn => {
+    btn.style.backgroundColor = 'white';
+    btn.style.color = 'black';
+  });
+}
+// 重置函数优化
+function resetModal13() {
+  const mediaContainer = document.querySelector('.modal-body .col-md-6');
+  let currentMedia = document.getElementById('mainMedia13');
+
+  // 强制替换为视频元素
+  if (!currentMedia || currentMedia.tagName !== 'VIDEO') {
+    const video = document.createElement('video');
+    video.id = 'mainMedia13';
+    video.src = 'newimg/exp1.mp4';
+    video.controls = true;
+    video.autoplay = true;
+    video.muted = true;
+    video.loop = true;
+    video.setAttribute('style', currentMedia ? currentMedia.style.cssText : ''); 
+    
+    if(currentMedia) {
+      mediaContainer.replaceChild(video, currentMedia);
+    } else {
+      mediaContainer.appendChild(video);
+    }
+  }
+
+  // 强制重置所有按钮样式
+  document.querySelectorAll('.modal button').forEach(btn => {
+    btn.style.backgroundColor = 'white';
+    btn.style.color = 'black';
+  });
+}
+// 重置函数优化
+function resetModal14() {
+  const mediaContainer = document.querySelector('.modal-body .col-md-6');
+  let currentMedia = document.getElementById('mainMedia14');
+
+  // 强制替换为视频元素
+  if (!currentMedia || currentMedia.tagName !== 'VIDEO') {
+    const video = document.createElement('video');
+    video.id = 'mainMedia14';
+    video.src = 'newimg/exp1.mp4';
+    video.controls = true;
+    video.autoplay = true;
+    video.muted = true;
+    video.loop = true;
+    video.setAttribute('style', currentMedia ? currentMedia.style.cssText : ''); 
+    
+    if(currentMedia) {
+      mediaContainer.replaceChild(video, currentMedia);
+    } else {
+      mediaContainer.appendChild(video);
+    }
+  }
+
+  // 强制重置所有按钮样式
+  document.querySelectorAll('.modal button').forEach(btn => {
+    btn.style.backgroundColor = 'white';
+    btn.style.color = 'black';
+  });
+}
+
+
+
+// 修改点击处理函数
+function handleButtonClick11(button) {
+  document.querySelectorAll('.modal button').forEach(btn => {
+    btn.style.backgroundColor = 'white';
+    btn.style.color = 'black';
+  });
+  
+  button.style.backgroundColor = '#8461C4';
+  button.style.color = 'white';
+
+  // 更新媒体内容
+  const mediaElement = document.getElementById('mainMedia11');
+  const newImageSrc = button.getAttribute('data-image');
+
+  if (mediaElement.tagName === 'VIDEO') {
+    const img = document.createElement('img');
+    img.id = 'mainMedia11';
+    img.src = newImageSrc;
+    img.style.cssText = mediaElement.style.cssText;
+    mediaElement.parentNode.replaceChild(img, mediaElement);
+  } else {
+    mediaElement.src = newImageSrc;
+  }
+}
+
+// 修改点击处理函数
+function handleButtonClick12(button) {
+  document.querySelectorAll('.modal button').forEach(btn => {
+    btn.style.backgroundColor = 'white';
+    btn.style.color = 'black';
+  });
+  
+  button.style.backgroundColor = '#8461C4';
+  button.style.color = 'white';
+
+  // 更新媒体内容
+  const mediaElement = document.getElementById('mainMedia12');
+  const newImageSrc = button.getAttribute('data-image');
+
+  if (mediaElement.tagName === 'VIDEO') {
+    const img = document.createElement('img');
+    img.id = 'mainMedia12';
+    img.src = newImageSrc;
+    img.style.cssText = mediaElement.style.cssText;
+    mediaElement.parentNode.replaceChild(img, mediaElement);
+  } else {
+    mediaElement.src = newImageSrc;
+  }
+}
+
+// 修改点击处理函数
+function handleButtonClick13(button) {
+  document.querySelectorAll('.modal button').forEach(btn => {
+    btn.style.backgroundColor = 'white';
+    btn.style.color = 'black';
+  });
+  
+  button.style.backgroundColor = '#8461C4';
+  button.style.color = 'white';
+
+  // 更新媒体内容
+  const mediaElement = document.getElementById('mainMedia13');
+  const newImageSrc = button.getAttribute('data-image');
+
+  if (mediaElement.tagName === 'VIDEO') {
+    const img = document.createElement('img');
+    img.id = 'mainMedia13';
+    img.src = newImageSrc;
+    img.style.cssText = mediaElement.style.cssText;
+    mediaElement.parentNode.replaceChild(img, mediaElement);
+  } else {
+    mediaElement.src = newImageSrc;
+  }
+}
+
+// 修改点击处理函数
+function handleButtonClick14(button) {
+  document.querySelectorAll('.modal button').forEach(btn => {
+    btn.style.backgroundColor = 'white';
+    btn.style.color = 'black';
+  });
+  
+  button.style.backgroundColor = '#8461C4';
+  button.style.color = 'white';
+
+  // 更新媒体内容
+  const mediaElement = document.getElementById('mainMedia14');
+  const newImageSrc = button.getAttribute('data-image');
+
+  if (mediaElement.tagName === 'VIDEO') {
+    const img = document.createElement('img');
+    img.id = 'mainMedia14';
+    img.src = newImageSrc;
+    img.style.cssText = mediaElement.style.cssText;
+    mediaElement.parentNode.replaceChild(img, mediaElement);
+  } else {
+    mediaElement.src = newImageSrc;
+  }
+}
+
