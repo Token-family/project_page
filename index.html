@@ -352,12 +352,46 @@
     </div>
   </section>
 
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <!-- <h3>TL;DR</h3> -->
+          <h3 class="gradient-text—TL">TL;DR</h3>
 
+          <hr style="margin-top: 0px" />
+          <p class="text-left">
+            (1) The first token-level image text dataset (<span style="color: #c68b5b"><strong>TokenIT</strong> </span>) is proposed, which consists of <span style="color: #c20e0e"><strong>20M</strong> </span> images and <span style="color: #c20e0e"><strong>1.8B</strong> </span> high-quality token-mask pairs.<br>
+            (2) The first token-level text image foundation model, <span style="color: #78aa58"><strong>TokenOCR</strong> </span> , is proposed to support various downstream tasks. <br>
+            (3) The image-as-text semantic capability inspires us to develop <span style="color: #6589bf"><strong>TokenVL</strong></span>, a VQA-based MLLM tailored for document understanding. <br>
+            (4) Extensive experiments demonstrate the effectiveness of our proposed <span style="color: #78aa58"><strong>TokenOCR</strong> </span>  and <span style="color: #6589bf"><strong>TokenVL</strong></span>. Specifically, <span style="color: #78aa58"><strong>TokenOCR</strong> </span>  shows exceptional "zero-shot" capabilities and flexibility compared to other VFMs, such as CLIP, SAM, and InternViT2.5. <span style="color: #6589bf"><strong>TokenVL</strong></span> with 8B parameters, incorporating <span style="color: #78aa58"><strong>TokenOCR</strong> </span>  as the VFM, achieves performance gains of <span style="color: #c20e0e"><strong>38</strong> </span> on OCRBench and an average of <span style="color: #c20e0e"><strong>8.8%</strong> </span> across ten VQA tasks. Similarly, <span style="color: #6589bf"><strong>TokenVL</strong></span> with 2B parameters results in performance gains of <span style="color: #c20e0e"><strong>17</strong> </span> on OCRBench and an average of <span style="color: #c20e0e"><strong>13.34%</strong> </span> on the ten VQA tasks. 
+            <!-- <strong>All codes and weights are publicly available.</strong> -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section>
     <div class="container">
       <div class="row">
         <div class="col-12">
+          <body>
+            <h3 class="gradient-text—english">BPE Token Visualization</h3>
+            <ul>
+                <li>
+                    <a href="https://drive.google.com/file/d/16DbVy4dMuVCTjnTFAV5ebvs37TFhjylx/view?usp=sharing" target="_blank">
+                        Scene | Document | Code
+                    </a> &&
+                    <a href="https://drive.google.com/file/d/11tA1h35PsZV5rYPMyVvXbqMkWv7yYI8c/view?usp=sharing" target="_blank">
+                        Chart | Table | GUI
+                    </a> &&
+                    <a href="https://drive.google.com/file/d/1-FO6IWVP9zritGd0ufRlzPJbFH9WMoT8/view?usp=sharing" target="_blank">
+                        Chinese | Punctuation
+                    </a>
+                </li>
+            </ul>
+        </body>
 <!-- 插入视频 -->
 <!-- <video width="100%" autoplay loop muted playsinline style="border: 5px solid #ccc; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
   <source src="newimg/video1.mp4" type="video/mp4">
@@ -421,7 +455,7 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h6 class="gradient-text—english">For aesthetic purposes, we have standardized the images to a uniform 3:4 ratio and randomly selected a few for demonstration. 
+          <h6>For aesthetic purposes, we have standardized the images to a uniform 3:4 ratio and randomly selected a few for demonstration. 
             To explore more complex and challenging examples, please check out <a href="https://huggingface.co/spaces/TongkunGuan/TokenOCR" target="_blank">our demo</a> .</h6>
           <hr style="margin-top: 0px" />
           </a>
@@ -1944,27 +1978,6 @@
     <title>Gradient Text Example</title>
 </head>
 <body>
-  <!-- <h3 class="gradient-text—Abstract">TokenIT Dataset</h3> -->
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-
-          <!-- <h3>TL;DR</h3> -->
-          <h3 class="gradient-text—TL">TL;DR</h3>
-
-          <hr style="margin-top: 0px" />
-          <p class="text-left">
-            (1) The first token-level image text dataset (<span style="color: #c68b5b"><strong>TokenIT</strong> </span>) is proposed, which consists of <span style="color: #c20e0e"><strong>20M</strong> </span> images and <span style="color: #c20e0e"><strong>1.8B</strong> </span> high-quality token-mask pairs.<br>
-            (2) The first token-level text image foundation model, <span style="color: #78aa58"><strong>TokenOCR</strong> </span> , is proposed to support various downstream tasks. <br>
-            (3) The image-as-text semantic capability inspires us to develop <span style="color: #6589bf"><strong>TokenVL</strong></span>, a VQA-based MLLM tailored for document understanding. <br>
-            (4) Extensive experiments demonstrate the effectiveness of our proposed <span style="color: #78aa58"><strong>TokenOCR</strong> </span>  and <span style="color: #6589bf"><strong>TokenVL</strong></span>. Specifically, <span style="color: #78aa58"><strong>TokenOCR</strong> </span>  shows exceptional "zero-shot" capabilities and flexibility compared to other VFMs, such as CLIP, SAM, and InternViT2.5. <span style="color: #6589bf"><strong>TokenVL</strong></span> with 8B parameters, incorporating <span style="color: #78aa58"><strong>TokenOCR</strong> </span>  as the VFM, achieves performance gains of <span style="color: #c20e0e"><strong>38</strong> </span> on OCRBench and an average of <span style="color: #c20e0e"><strong>8.8%</strong> </span> across ten VQA tasks. Similarly, <span style="color: #6589bf"><strong>TokenVL</strong></span> with 2B parameters results in performance gains of <span style="color: #c20e0e"><strong>17</strong> </span> on OCRBench and an average of <span style="color: #c20e0e"><strong>13.34%</strong> </span> on the ten VQA tasks. 
-            <!-- <strong>All codes and weights are publicly available.</strong> -->
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
 
 
 <html lang="en">
